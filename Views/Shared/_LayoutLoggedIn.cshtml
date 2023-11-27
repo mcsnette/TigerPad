@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <!-- ICONSOUT CDN-->
+    <link rel="stylesheet"
+          href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css" />
+    <!-- Favicons -->
+    <link href="~/images/icon.png" rel="icon" />
+</head>
+<body>
+    <!--START OF NAVIGATION BAR-->
+    <header>
+        <nav class="navbar-logged">
+            <ul>
+                <li><img src="~/images/logo-square.png" /></li>
+                <li><a asp-controller="User" asp-action="UserHomepage">HOME</a></li>
+                <li><a asp-controller="User" asp-action="UserInquiries">INQUIRIES</a></li>
+                <li><a asp-controller="User" asp-action="UserBookmarks">BOOKMARKS</a></li>
+                <li class="logout-btn"><button>LOGOUT</button></li>
+            </ul>
+        </nav>
+        <!--END OF NAVIGATION BAR-->
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

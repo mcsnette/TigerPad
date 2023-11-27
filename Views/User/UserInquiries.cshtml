@@ -1,0 +1,114 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
+}
+
+<!--MAIN CONTAINER-->
+<div class="user-inquiries-container">
+    <!--==================LEFT SIDE=======================-->
+    <div class="user-inq-left-container">
+        <div class="inq-left-profile">
+            <div class="inq-user-profile-photo">
+                <img src="~/images/profile-3.jpg" />
+            </div>
+            <div class="inq-user-profile-name">
+                <p>Caroline Herschel</p>
+                <p>&#64itsCaroline</p>
+            </div>
+        </div>
+
+        <div class="inq-left-sidebar">
+            <a asp-controller="User" asp-action="UserHomepage" class="inq-sidebar-item">
+                <span><i class="uil uil-house-user"></i></span>
+                <h3>Home</h3>
+            </a>
+            <a asp-controller="User" asp-action="UserInquiries" class="inq-sidebar-item active">
+                <span><i class="uil uil-comment-question"></i></span>
+                <h3>Inquiries</h3>
+            </a>
+            <a asp-controller="User" asp-action="UserBookmarks" class="inq-sidebar-item">
+                <span><i class="uil uil-notebooks"></i></span>
+                <h3>Bookmarks</h3>
+            </a>
+        </div>
+        <div class="inq-left-button"><button>ASK QUESTION</button></div>
+    </div>
+
+    <!--==================MIDDLE SIDE=======================-->
+    <div class="inq-user-middle-container">
+        <!------------------ HOMEPAGE -------------->
+        <div class="middle-inquiries-text">
+            <p>INQUIRIES</p>
+        </div>
+
+        <!----------- START OF POSTS----------->
+        <div class="middle-inquiries-post">
+            <div class="inq-user-detail">
+                <div class="inq-profile-photo">
+                    <img src="~/images/profile-4.jpg" />
+                </div>
+                <div class="inq-user-info">
+                    <p class="inq-name">Makoy</p>
+                    <p class="inq-username">&#64onyourmark</p>
+                </div>
+            </div>
+            <div class="inq-user-post">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                    varius elementum nisl? Vel ullamcorper eros auctor sedDonec
+                    iaculis sagittis congue. Integer faucibus efficitur feugiat. Class
+                    aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                    inceptos himenaeos.
+                </p>
+            </div>
+            <div class="inq-user-bookmark">
+                <span><i class="uil uil-comments"></i></span>
+                <span><i class="uil uil-notebooks"></i></span>
+            </div>
+        </div>
+
+        <!-----------------END OF POSTS---------------->
+
+        <div class="middle-inquiries-post">
+            <div class="inq-user-detail">
+                <div class="inq-profile-photo">
+                    <img src="~/images/profile-2.jpg" />
+                </div>
+                <div class="inq-user-info">
+                    <p class="inq-name">JJ</p>
+                    <p class="inq-username">&#64startswithj</p>
+                </div>
+            </div>
+            <div class="inq-user-post">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                    varius elementum nisl? Vel ullamcorper eros auctor sedDonec
+                    iaculis sagittis congue. Integer faucibus efficitur feugiat. Class
+                    aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                    inceptos himenaeos.
+                </p>
+            </div>
+            <div class="inq-user-bookmark">
+                <span><i class="uil uil-comments"></i></span>
+                <span><i class="uil uil-notebooks"></i></span>
+            </div>
+        </div>
+
+        <!-- END OF POSTS-->
+        <div class="inq-middle-end-post">
+            <p>You've reached the end. Wait for new questions.</p>
+        </div>
+    </div>
+    <!--==================RIGHT SIDE=======================-->
+    <div class="inq-user-right-container">
+        <div class="inq-quote-text"><p>Quote of the Day</p></div>
+        <div class="inq-quote-content">
+            <p>
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                varius elementum nisl? Vel ullamcorper eros auctor sed"
+            </p>
+        </div>
+    </div>
+
+    <!--END OF RIGHT SIDE-->
+</div>
+<!-- END OF MAIN CONTAINER-->

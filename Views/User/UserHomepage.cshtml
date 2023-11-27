@@ -1,0 +1,118 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
+}
+
+<!--MAIN CONTAINER-->
+<div class="user-homepage-container">
+    <!--==================LEFT SIDE=======================-->
+    <div class="user-left-container">
+        <div class="left-profile">
+            <div class="user-profile-photo">
+                <img src="~/images/profile-3.jpg" />
+            </div>
+            <div class="user-profile-name">
+                <p>Caroline Herschel</p>
+                <p>&#64itsCaroline</p>
+            </div>
+        </div>
+
+        <div class="left-sidebar">
+            <a asp-controller="User" asp-action="UserHomepage" class="sidebar-item active">
+                <span><i class="uil uil-house-user"></i></span>
+                <h3>Home</h3>
+            </a>
+            <a asp-controller="User" asp-action="UserInquiries" class="sidebar-item">
+                <span><i class="uil uil-comment-question"></i></span>
+                <h3>Inquiries</h3>
+            </a>
+            <a asp-controller="User" asp-action="UserBookmarks" class="sidebar-item">
+                <span><i class="uil uil-notebooks"></i></span>
+                <h3>Bookmarks</h3>
+            </a>
+        </div>
+        <div class="left-button"><button>CREATE POST</button></div>
+    </div>
+
+    <!--==================MIDDLE SIDE=======================-->
+    <div class="user-middle-container">
+        <!------------------ HOMEPAGE -------------->
+        <div class="middle-homepage-text">
+            <p>HOMEPAGE</p>
+        </div>
+
+        <!----------- START OF POSTS----------->
+        <div class="middle-homepage-post">
+            <div class="user-detail">
+                <div class="profile-photo">
+                    <img src="~/images/profile-4.jpg" />
+                </div>
+                <div class="user-info">
+                    <p class="name">Makoy</p>
+                    <p class="username">&#64onyourmark</p>
+                </div>
+            </div>
+            <div class="user-post">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                    varius elementum nisl? Vel ullamcorper eros auctor sedDonec
+                    iaculis sagittis congue. Integer faucibus efficitur feugiat. Class
+                    aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                    inceptos himenaeos.
+                </p>
+            </div>
+            <div class="user-bookmark">
+                <span><i class="uil uil-notebooks"></i></span>
+            </div>
+        </div>
+
+        <!-----------------END OF POSTS---------------->
+
+        <div class="middle-homepage-post">
+            <div class="user-detail">
+                <div class="profile-photo">
+                    <img src="~/images/profile-2.jpg" />
+                </div>
+                <div class="user-info">
+                    <p class="name">JJ</p>
+                    <p class="username">&#64startswithj</p>
+                </div>
+            </div>
+            <div class="user-post">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                    varius elementum nisl? Vel ullamcorper eros auctor sedDonec
+                    iaculis sagittis congue. Integer faucibus efficitur feugiat. Class
+                    aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                    inceptos himenaeos.
+                </p>
+            </div>
+            <div class="user-bookmark">
+                <span><i class="uil uil-notebooks"></i></span>
+            </div>
+        </div>
+        <div class="middle-homepage-post"></div>
+        <div class="middle-homepage-post"></div>
+        <div class="middle-homepage-post"></div>
+        <div class="middle-homepage-post"></div>
+        <div class="middle-homepage-post"></div>
+        <div class="middle-homepage-post"></div>
+
+        <!-- END OF POSTS-->
+        <div class="middle-end-post">
+            <p>You've reached the end. Wait for new posts.</p>
+        </div>
+    </div>
+    <!--==================RIGHT SIDE=======================-->
+    <div class="user-right-container">
+        <div class="quote-text"><p>Quote of the Day</p></div>
+        <div class="quote-content">
+            <p>
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                varius elementum nisl? Vel ullamcorper eros auctor sed"
+            </p>
+        </div>
+    </div>
+
+    <!--END OF RIGHT SIDE-->
+</div>
+<!-- END OF MAIN CONTAINER-->

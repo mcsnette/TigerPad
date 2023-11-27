@@ -1,0 +1,73 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutLoggedOut.cshtml";
+}
+
+<div class="main-container">
+    <div class="register-container">
+        <div class="register-logo">
+            <img src="./images/logo-notext.png" />
+        </div>
+        <div class="community">
+            <h3><b>community</b></h3>
+        </div>
+        <div class="made-with-more">
+            <h3><b>made with more</b></h3>
+        </div>
+        <div class="productivity">
+            <h3><b>productivity</b></h3>
+        </div>
+    </div>
+
+    <!--START OF REGISTRATION FORM-->
+    <div class="register-form-container">
+        <div class="register-form">
+            <h3><b>SIGN UP</b></h3>
+            <hr />
+        </div>
+        <div>
+            <label for="username"><b>USERNAME</b></label>
+        </div>
+        <div class="register-form">
+            <input class="register-field"
+                   type="text"
+                   placeholder="Enter your username"
+                   name="username"
+                   required />
+        </div>
+
+        <div>
+            <label for="email"><b>EMAIL ADDRESS</b></label>
+        </div>
+        <div class="register-form">
+            <input class="register-field"
+                   type="email"
+                   placeholder="thomasino@ust.edu.ph"
+                   name="email"
+                   required />
+        </div>
+
+        <div>
+            <label for="password"><b>PASSWORD</b></label>
+        </div>
+        <div class="register-form">
+            <input class="register-field"
+                   type="password"
+                   placeholder="Type your password"
+                   name="password"
+                   required />
+        </div>
+
+        <div class="register-form">
+            <button class="btn-main" type="submit">Create Account</button>
+        </div>
+    </div>
+
+    <!-- END OF REGISTRATION FORM-->
+</div>
+<!-- END OF MAIN CONTAINER-->
+<div class="secondary-container">
+    <p>Already have an account?</p>
+    <div class="register-form">
+         <a asp-controller="SignUp" asp-action="UserLogin" class="btn-login">Login</a>
+    </div>
+</div>

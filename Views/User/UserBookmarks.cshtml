@@ -1,0 +1,113 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
+}
+
+<!--MAIN CONTAINER-->
+<div class="user-bookmarks-container">
+    <!--==================LEFT SIDE=======================-->
+    <div class="user-bmark-left-container">
+        <div class="bmark-left-profile">
+            <div class="bmark-user-profile-photo">
+                <img src="~/images/profile-3.jpg" />
+            </div>
+            <div class="bmark-user-profile-name">
+                <p>Caroline Herschel</p>
+                <p>&#64itsCaroline</p>
+            </div>
+        </div>
+
+        <div class="bmark-left-sidebar">
+            <a asp-controller="User" asp-action="UserHomepage" class="bmark-sidebar-item">
+                <span><i class="uil uil-house-user"></i></span>
+                <h3>Home</h3>
+            </a>
+            <a asp-controller="User" asp-action="UserInquiries" class="bmark-sidebar-item">
+                <span><i class="uil uil-comment-question"></i></span>
+                <h3>Inquiries</h3>
+            </a>
+            <a asp-controller="User" asp-action="UserBookmarks" class="bmark-sidebar-item active">
+                <span><i class="uil uil-notebooks"></i></span>
+                <h3>Bookmarks</h3>
+            </a>
+        </div>
+    </div>
+
+    <!--==================MIDDLE SIDE=======================-->
+    <div class="bmark-user-middle-container">
+        <!------------------ BOOKMARKS-------------->
+        <div class="middle-bookmarks-text">
+            <p>BOOKMARKS</p>
+        </div>
+
+        <!----------- START OF POSTS----------->
+        <div class="middle-bookmarks-post">
+            <div class="bmark-user-detail">
+                <div class="bmark-profile-photo">
+                    <img src="~/images/profile-4.jpg" />
+                </div>
+                <div class="bmark-user-info">
+                    <p class="bmark-name">Makoy</p>
+                    <p class="bmark-username">&#64onyourmark</p>
+                </div>
+            </div>
+            <div class="bmark-user-post">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                    varius elementum nisl? Vel ullamcorper eros auctor sedDonec
+                    iaculis sagittis congue. Integer faucibus efficitur feugiat. Class
+                    aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                    inceptos himenaeos.
+                </p>
+            </div>
+            <div class="bmark-user-bookmark">
+                <span><i class="uil uil-comments"></i></span>
+                <span><i class="uil uil-notebooks"></i></span>
+            </div>
+        </div>
+
+        <!-----------------END OF POSTS---------------->
+
+        <div class="middle-bookmarks-post">
+            <div class="bmark-user-detail">
+                <div class="bmark-profile-photo">
+                    <img src="~/images/profile-2.jpg" />
+                </div>
+                <div class="bmark-user-info">
+                    <p class="bmark-name">JJ</p>
+                    <p class="bmark-username">&#64startswithj</p>
+                </div>
+            </div>
+            <div class="bmark-user-post">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                    varius elementum nisl? Vel ullamcorper eros auctor sedDonec
+                    iaculis sagittis congue. Integer faucibus efficitur feugiat. Class
+                    aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                    inceptos himenaeos.
+                </p>
+            </div>
+            <div class="bmark-user-bookmark">
+                <span><i class="uil uil-comments"></i></span>
+                <span><i class="uil uil-notebooks"></i></span>
+            </div>
+        </div>
+
+        <!-- END OF POSTS-->
+        <div class="bmark-middle-end-post">
+            <p>You've reached the end.</p>
+        </div>
+    </div>
+    <!--==================RIGHT SIDE=======================-->
+    <div class="bmark-user-right-container">
+        <div class="bmark-quote-text"><p>Quote of the Day</p></div>
+        <div class="bmark-quote-content">
+            <p>
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                varius elementum nisl? Vel ullamcorper eros auctor sed"
+            </p>
+        </div>
+    </div>
+
+    <!--END OF RIGHT SIDE-->
+</div>
+<!-- END OF MAIN CONTAINER-->

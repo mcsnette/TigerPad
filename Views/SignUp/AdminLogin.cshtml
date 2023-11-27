@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutLoggedOut.cshtml";
+}
+
+<!--START OF LOGIN FORM-->
+<div class="admin-login-form-container">
+    <div class="admin-login-form">
+        <h3><b>WELCOME BACK, ADMIN</b></h3>
+        <hr class="admin-login-hr" />
+    </div>
+    <div>
+        <label for="username"><b>USERNAME</b></label>
+    </div>
+    <div class="admin-login-form">
+        <input class="admin-login-field"
+               type="text"
+               placeholder="Enter your username"
+               name="username"
+               required />
+    </div>
+
+    <div>
+        <label for="password"><b>PASSWORD</b></label>
+    </div>
+    <div class="admin-login-form">
+        <input class="admin-login-field"
+               type="password"
+               placeholder="Type your password"
+               name="password"
+               required />
+    </div>
+
+    <div class="admin-login-form">
+        <button class="btn-main" type="submit">LOGIN</button>
+    </div>
+
+    <div class="admin-login-form">
+        <p class="user-text">USE YOUR PERSONAL ACCOUNT?</p>
+    </div>
+    <div class="admin-login-form">
+        <a asp-controller="SignUp" asp-action="UserLogin" class="btn-user">USER LOGIN</a>
+    </div>
+</div>
