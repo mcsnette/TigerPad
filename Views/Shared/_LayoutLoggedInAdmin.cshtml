@@ -5,16 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <!-- ICONSOUT CDN-->
+    <link rel="stylesheet"
+          href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css" />
     <!-- Favicons -->
     <link href="~/images/icon.png" rel="icon" />
 </head>
 <body>
     <!--START OF NAVIGATION BAR-->
     <header>
-        <nav class="navbar">
+        <nav class="navbar-logged">
             <ul>
-                <li><img src="~/images/logo-withtext.png" /></li>
-                <li><a asp-controller="Home" asp-action="About">About</a></li>
+                <li><img src="~/images/logo-square.png" /></li>
+                <li><a asp-controller="Admin" asp-action="AdminHomepage">HOME</a></li>
+                <li><a asp-controller="Admin" asp-action="AdminInquiries">INQUIRIES</a></li>
+                <li class="logout-btn"><button>LOGOUT</button></li>
             </ul>
         </nav>
         <!--END OF NAVIGATION BAR-->
