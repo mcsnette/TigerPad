@@ -31,7 +31,7 @@
     </div>
 
     <div class="user-login-form">
-        <a asp-controller="User" asp-action="UserHomepage" class="btn-main">LOGIN</a>
+        <button class="btn-main" type="button" onclick="redirectToUserHomepage()">LOGIN</button>
     </div>
 
     <div class="user-login-form">
@@ -48,3 +48,10 @@
         <a asp-controller="SignUp" asp-action="AdminLogin" class="btn-admin">ADMIN</a>
     </div>
 </div>
+
+<script>
+    function redirectToUserHomepage() {
+        // Redirect to UserHomepage page
+        window.location.href = '/User/UserHomepage';
+    }
+</script>
