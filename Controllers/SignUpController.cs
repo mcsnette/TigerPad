@@ -14,9 +14,9 @@ namespace TigerPadG4.Controllers
             return View("UserLogin");
         }
 
-        public IActionResult AdminLogin() 
+        public IActionResult AdminLogin()
         {
-            return View("AdminLogin"); 
+            return View("AdminLogin");
         }
     }
 }
