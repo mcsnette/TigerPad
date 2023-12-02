@@ -1,17 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TigerPadG4.Services;
 
 namespace TigerPadG4.Controllers
 {
     public class UserController : Controller
     {
+        private readonly UserProfileService _userProfileService;
+
+        public UserController(UserProfileService userProfileService)
+        {
+            _userProfileService = userProfileService;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult UserProfile()
+        public IActionResult UserProfile(int id)
         {
-            return View("UserProfile");
+            var userProfile = _userProfileService.GetUserProfile(id);
+
+            if (userProfile == null)
+            {
+                return NotFound();
+            }
+
+            return View(userProfile);
         }
 
         public IActionResult EditUserProfile()
@@ -33,6 +48,5 @@ namespace TigerPadG4.Controllers
         {
             return View("UserBookmarks");
         }
-
     }
 }
