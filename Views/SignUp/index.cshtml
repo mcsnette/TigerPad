@@ -58,9 +58,10 @@
         </div>
 
         <div class="register-form">
-            <button class="btn-main" type="submit">Create Account</button>
+            <button class="btn-main" type="button" onclick="redirectToUserLogin()">Create Account</button>
         </div>
     </div>
+
 
     <!-- END OF REGISTRATION FORM-->
 </div>
@@ -71,3 +72,10 @@
          <a asp-controller="SignUp" asp-action="UserLogin" class="btn-login">Login</a>
     </div>
 </div>
+
+<script>
+    function redirectToUserLogin() {
+        // Redirect to UserLogin page
+        window.location.href = '/SignUp/UserLogin';
+    }
+</script>
