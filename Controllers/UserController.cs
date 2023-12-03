@@ -1,32 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TigerPadG4.Services;
+
 
 namespace TigerPadG4.Controllers
 {
     public class UserController : Controller
     {
-        private readonly UserProfileService _userProfileService;
+        
 
-        public UserController(UserProfileService userProfileService)
+        public IActionResult UserProfile()
         {
-            _userProfileService = userProfileService;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult UserProfile(int id)
-        {
-            var userProfile = _userProfileService.GetUserProfile(id);
-
-            if (userProfile == null)
-            {
-                return NotFound();
-            }
-
-            return View(userProfile);
+            return View("UserProfile");
         }
 
         public IActionResult EditUserProfile()
