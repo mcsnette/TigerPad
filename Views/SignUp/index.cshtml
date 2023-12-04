@@ -1,6 +1,10 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutLoggedOut.cshtml";
+    
 }
+
+@using TigerPadG4.ViewModel
+@model RegisterViewModel;
 
 <div class="main-container">
     <div class="register-container">
@@ -19,16 +23,21 @@
     </div>
 
     <!--START OF REGISTRATION FORM-->
+ <form asp-action = "Register">
+
+        <div class="form-group" asp-validation-summary="All"></div>
+
     <div class="register-form-container">
         <div class="register-form">
             <h3><b>SIGN UP</b></h3>
             <hr />
         </div>
         <div>
-            <label for="username"><b>USERNAME</b></label>
+            <label asp-for="UserName"><b>USERNAME</b></label>
         </div>
         <div class="register-form">
-            <input class="register-field"
+            <input asp-for ="UserName"
+                   class="register-field"
                    type="text"
                    placeholder="Enter your username"
                    name="username"
@@ -39,7 +48,8 @@
             <label for="email"><b>EMAIL ADDRESS</b></label>
         </div>
         <div class="register-form">
-            <input class="register-field"
+            <input asp-for="Email"
+                    class="register-field"
                    type="email"
                    placeholder="thomasino@ust.edu.ph"
                    name="email"
@@ -47,10 +57,12 @@
         </div>
 
         <div>
-            <label for="password"><b>PASSWORD</b></label>
+            <label asp-for="Password"><b>PASSWORD</b></label>
         </div>
         <div class="register-form">
-            <input class="register-field"
+            <input 
+                    asp-for="Password"
+                    class="register-field"
                    type="password"
                    placeholder="Type your password"
                    name="password"
@@ -58,13 +70,17 @@
         </div>
 
         <div class="register-form">
-            <button class="btn-main" type="button" onclick="redirectToUserLogin()">Create Account</button>
+            <button class="btn-main" type="submit" value="Register Account">Create Account</button>
         </div>
     </div>
 
 
+
+    </form>
     <!-- END OF REGISTRATION FORM-->
 </div>
+
+
 <!-- END OF MAIN CONTAINER-->
 <div class="secondary-container">
     <p>Already have an account?</p>
