@@ -1,6 +1,11 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutLoggedOut.cshtml";
+    
 }
+
+@using TigerPadG4.ViewModel
+@model LoginViewModel;
+
 
 <!--START OF LOGIN FORM-->
 <div class="login-form-container">
@@ -8,32 +13,37 @@
         <h3><b>WELCOME BACK, TIGER</b></h3>
         <hr class="login-hr" />
     </div>
-    <div>
-        <label for="username"><b>USERNAME</b></label>
-    </div>
-    <div class="user-login-form">
-        <input class="user-login-field"
-               type="text"
-               placeholder="Enter your username"
-               name="username"
-               required />
-    </div>
 
-    <div>
-        <label for="password"><b>PASSWORD</b></label>
-    </div>
-    <div class="user-login-form">
-        <input class="user-login-field"
-               type="password"
-               placeholder="Type your password"
-               name="password"
-               required />
-    </div>
+    <form asp-action="Login">
+        <div>
+            <label asp-for="Username"><b>USERNAME</b></label>
+        </div>
+        <div class="user-login-form">
+            <input asp-for="Username"
+                   class="user-login-field"
+                   type="text"
+                   placeholder="Enter your username"
+                   name="username"
+                   required />
+        </div>
 
-    <div class="user-login-form">
-        <button class="btn-main" type="button" onclick="redirectToUserHomepage()">LOGIN</button>
-    </div>
+        <div>
+            <label asp-for="Password"><b>PASSWORD</b></label>
+        </div>
+        <div class="user-login-form">
+            <input asp-for="Password"
+                   class="user-login-field"
+                   type="password"
+                   placeholder="Type your password"
+                   name="password"
+                   required />
+        </div>
 
+        <div class="user-login-form">
+            <button class="btn-main" type="submit">LOGIN</button>
+        </div>
+    </form>
+    
     <div class="user-login-form">
         <p class="signup-text">DON'T HAVE AN ACCOUNT?</p>
     </div>

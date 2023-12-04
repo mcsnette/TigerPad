@@ -35,29 +35,25 @@ namespace TigerPadG4.Controllers
         }
 
         [HttpPost]
-            public async Task<IActionResult> Login(LoginViewModel loginInfo)
-
-            
+            public async Task<IActionResult> Login(LoginViewModel loginInfo, UserClass user)
             {
 
-            UserClass newUser = new();
-
-                var result = await _signInManager.PasswordSignInAsync(loginInfo.Email,
+                var result = await _signInManager.PasswordSignInAsync(loginInfo.Username,
                                                                       loginInfo.Password,
                                                                       false,
                                                                       false);
+
+
                 if (result.Succeeded)
                 {
-                    if (newUser.Access == true)
-                        {
-                         return RedirectToAction("Index", "User");
-                }
+                    switch (user.Access)
+                    {
+                        case false:
+                            return RedirectToAction("UserHomepage", "User");
+                        case true:
+                            return RedirectToAction("AdminHomepage", "Admin");
+                    }
 
-                    else if (newUser.Access == false)
-                {
-                    return RedirectToAction("Index", "Admin");
-                }
-                   
                 }
                 else
                 {
@@ -65,7 +61,7 @@ namespace TigerPadG4.Controllers
                 }
 
                 return View("Index", loginInfo);
-            }
+                }
 
         //LOGOUT
         public async Task<IActionResult> Logout()
