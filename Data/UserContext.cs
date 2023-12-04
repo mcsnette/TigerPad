@@ -16,23 +16,7 @@ public class UserContext : IdentityDbContext<UserClass>
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<UserClass>().HasData(
-
-            new UserClass
-            {
-                Username = "Test",
-                Password = "Test",
-                Email = "Test",
-                Access = true
-                
-
-            }
-            
-            
-            
-            
-            
-            );
+   
 
 
     }

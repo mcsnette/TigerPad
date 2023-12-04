@@ -44,7 +44,7 @@ namespace TigerPadG4.Controllers
 
                 var result = await _signInManager.PasswordSignInAsync(loginInfo.Email,
                                                                       loginInfo.Password,
-                                                                      true ,
+                                                                      false,
                                                                       false);
                 if (result.Succeeded)
                 {
@@ -94,7 +94,7 @@ namespace TigerPadG4.Controllers
                     UserName = userEnteredData.UserName,
                     Email = userEnteredData.Email,
                     Access = false
-                    };
+                };
 
                     var result = await _userManager.CreateAsync(newUser, userEnteredData.Password);
 
@@ -113,7 +113,7 @@ namespace TigerPadG4.Controllers
 
                 }
 
-                return View("Index", userEnteredData);
+                return View(userEnteredData);
             }
 
 

@@ -8,15 +8,15 @@ namespace TigerPadG4.Models
         public int Id { get; set; }
 
         [Display(Name = "Username")]
-        public string Username { get; set; }
+        public string RegUsername { get; set; }
 
         [Display(Name = "Password")]
-        public string Password { get; set; }
+        public string RegPassword { get; set; }
 
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string RegEmail { get; set; }
 
-        [Display(Name = "Role")]
-        public string Role { get; set; }
+        [Display(Name = "Access")]
+        public bool RegAccess { get; set; }
     }
 }
