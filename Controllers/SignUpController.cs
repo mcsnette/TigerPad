@@ -1,33 +1,29 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TigerPadG4.Data;
+using TigerPadG4.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using TigerPadG4.ViewModel;
 
 namespace TigerPadG4.Controllers
 {
     public class SignUpController : Controller
     {
+        private readonly UserContext _context;
 
+        public SignUpController(UserContext context)
+        {
+            _context = context;
+        }
 
-            private readonly SignInManager<UserClass> _signInManager;
-            private readonly UserManager<UserClass> _userManager;
+        public IActionResult Index()
+        {
+            return View();
+        }
 
-
-            public SignUpController(SignInManager<UserClass> signInManager, UserManager<UserClass> userManager)
-            {
-                _signInManager = signInManager;
-                _userManager = userManager;
-            }
-
-
-         public IActionResult Index()
-            {
-                return View();
-            }
-
-
-            //LOGIN
-
+        // LOGIN
         [HttpGet]
         public IActionResult UserLogin()
         {
@@ -35,93 +31,73 @@ namespace TigerPadG4.Controllers
         }
 
         [HttpPost]
-            public async Task<IActionResult> Login(LoginViewModel loginInfo, UserClass user)
+        public async Task<IActionResult> Login(LoginViewModel loginInfo)
+        {
+            var user = await _context.UserProfiles.SingleOrDefaultAsync(u => u.Username == loginInfo.Username && u.Password == loginInfo.Password);
+
+            if (user != null)
             {
-
-                var result = await _signInManager.PasswordSignInAsync(loginInfo.Username,
-                                                                      loginInfo.Password,
-                                                                      false,
-                                                                      false);
-
-
-                if (result.Succeeded)
+                if (user.Access == true)
                 {
-                    switch (user.Access)
-                    {
-                        case false:
-                            return RedirectToAction("UserHomepage", "User");
-                        case true:
-                            return RedirectToAction("AdminHomepage", "Admin");
-                    }
-
+                    HttpContext.Session.SetString("UserId", user.Id.ToString());
+                    return RedirectToAction("UserHomepage", "User");
                 }
+
                 else
                 {
-                    ModelState.AddModelError("", "Failed to Login");
+                    HttpContext.Session.SetString("UserId", user.Id.ToString());
+                    return RedirectToAction("AdminHomepage", "Admin");
                 }
+                
+            }
+            else
+            {
+                ModelState.AddModelError("", "Failed to Login");
+                return View("UserLogin", loginInfo);
+            }
+        }
 
-                return View("Index", loginInfo);
-                }
-
-        //LOGOUT
+        // LOGOUT
         public async Task<IActionResult> Logout()
-            {
-                await _signInManager.SignOutAsync();
-                return RedirectToAction("Index", "SignUp");
-            }
+        {
+            HttpContext.Session.Remove("UserId");
+            return RedirectToAction("UserLogin");
+        }
 
-
-
-
-         //REGISTER
+        // REGISTER
         [HttpGet]
-            public IActionResult Register()
-            {
-                return View();
-            }
-
-            [HttpPost]
-            public async Task<IActionResult> Register(RegisterViewModel userEnteredData)
-            {
-                if (ModelState.IsValid)
-                {
-                UserClass newUser = new()
-                {
-                    UserName = userEnteredData.UserName,
-                    Email = userEnteredData.Email,
-                    Access = false
-                };
-
-                    var result = await _userManager.CreateAsync(newUser, userEnteredData.Password);
-
-                    if (result.Succeeded)
-                    {
-                        return RedirectToAction("UserLogin", "SignUp" );
-                    }
-                    else
-                    {
-                        foreach (var error in result.Errors)
-                        {
-                            ModelState.AddModelError("", error.Description);
-                        }
-                    }
-
-
-                }
-
-                return View(userEnteredData);
-            }
-
-
-        public IActionResult AdminLogin()
+        public IActionResult Register()
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel userEnteredData)
+        {
+            if (ModelState.IsValid)
+            {
+                UserClass newUser = new UserClass
+                {
+                    Username = userEnteredData.UserName,
+                    Email = userEnteredData.Email,
+                    Password = userEnteredData.Password,
+                    Access = false
+                };
+
+                _context.UserProfiles.Add(newUser); // Ensure UserProfiles matches the DbSet name in your context
+                await _context.SaveChangesAsync();
+
+                HttpContext.Session.SetString("UserId", newUser.Id.ToString());
+
+                return RedirectToAction("UserLogin");
+            }
+
+            return View(userEnteredData);
         }
 
-        
-
-
-
-
+        public IActionResult AdminLogin()
+        {
+            return View();  
+        }
     }
+}

@@ -6,9 +6,9 @@ using TigerPadG4.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using TigerPadG4.ViewModel;
 
-public class UserContext : IdentityDbContext<UserClass>
+public class UserContext : DbContext
 {
-    public DbSet<UserModel> UserProfiles { get; set; }
+    public DbSet<UserClass> UserProfiles { get; set; }
     public UserContext(DbContextOptions<UserContext> options) : base(options)
     {
     }
