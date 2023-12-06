@@ -37,7 +37,7 @@ namespace TigerPadG4.Controllers
 
             if (user != null)
             {
-                if (user.Access == true)
+                if (user.Access == false)
                 {
                     HttpContext.Session.SetString("UserId", user.Id.ToString());
                     return RedirectToAction("UserHomepage", "User");
