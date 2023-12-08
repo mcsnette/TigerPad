@@ -1,3 +1,4 @@
+//program.cs
 using System;
 using TigerPadG4.Data;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,3 +49,4 @@ app.MapControllerRoute(
     pattern: "{controller=SignUp}/{action=UserLogin}/{id?}");
 
 app.Run();
+
