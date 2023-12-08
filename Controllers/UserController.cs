@@ -69,7 +69,19 @@ namespace LMagtakaITELEC.Controllers
 
         public IActionResult UserHomepage()
         {
-            return View("UserHomepage");
+            var posts = new List<PostModel>
+        {
+            new PostModel
+            {
+                ProfilePhoto = "~/images/profile-4.jpg",
+                Name = "Makoy",
+                Username = "@onyourmark",
+                PostContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla varius elementum nisl? Vel ullamcorper eros auctor sed..."
+            },
+            // Add more posts as needed
+        };
+
+            return View(posts);
         }
 
         public IActionResult UserInquiries()
@@ -79,6 +91,7 @@ namespace LMagtakaITELEC.Controllers
 
         public IActionResult UserBookmarks()
         {
+
             return View("UserBookmarks");
         }
     }

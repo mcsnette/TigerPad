@@ -1,4 +1,6 @@
-﻿﻿@{
+﻿ @model List<PostModel>
+﻿@{
+   
     Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
 }
 
@@ -12,7 +14,7 @@
             </div>
             <div class="user-profile-name">
                 <p>Caroline Herschel</p>
-                <p>&#64itsCaroline</p>
+                <p>&#64itsGago</p>
             </div>
         </div>
 
@@ -41,29 +43,26 @@
         </div>
 
         <!----------- START OF POSTS----------->
-        <div class="middle-homepage-post">
-            <div class="user-detail">
-                <div class="profile-photo">
-                    <img src="~/images/profile-4.jpg" />
+        @foreach (var post in Model)
+        {
+            <div class="middle-homepage-post">
+                <div class="user-detail">
+                    <div class="profile-photo">
+                        <img src="@post.ProfilePhoto" />
+                    </div>
+                    <div class="user-info">
+                        <p class="name">@post.Name</p>
+                        <p class="username">@post.Username</p>
+                    </div>
                 </div>
-                <div class="user-info">
-                    <p class="name">Makoy</p>
-                    <p class="username">&#64onyourmark</p>
+                <div class="user-post">
+                    <p>@post.PostContent</p>
+                </div>
+                <div class="user-bookmark">
+                    <span><i class="uil uil-notebooks"></i></span>
                 </div>
             </div>
-            <div class="user-post">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                    varius elementum nisl? Vel ullamcorper eros auctor sedDonec
-                    iaculis sagittis congue. Integer faucibus efficitur feugiat. Class
-                    aptent taciti sociosqu ad litora torquent per conubia nostra, per
-                    inceptos himenaeos.
-                </p>
-            </div>
-            <div class="user-bookmark">
-                <span><i class="uil uil-notebooks"></i></span>
-            </div>
-        </div>
+        }
 
         <!-----------------END OF POSTS---------------->
 
