@@ -1,5 +1,3 @@
-
-
 using System;
 using TigerPadG4.Data;
 using Microsoft.Extensions.DependencyInjection;

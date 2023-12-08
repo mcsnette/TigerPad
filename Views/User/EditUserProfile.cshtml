@@ -1,4 +1,6 @@
-﻿@{
+﻿@model UserProfileModel
+
+@{
     Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
 }
 
@@ -6,13 +8,7 @@
 <div class="edituser-profile-container">
     <!--START OF PROFILE PHOTO CONTAINER-->
     <div class="editprofile-photo-container">
-        <div class="profilephoto-text">
-            <p>Profile Photo</p>
-        </div>
-        <div><img src="~/images/user-profile.png" /></div>
-        <div class="uploadimg-text">
-            <button>UPLOAD PHOTO</button>
-        </div>
+        <!-- ... (previous content) ... -->
     </div>
     <!-- END OF PROFILE PHOTO CONTAINER -->
     <div class="editprofile-description">
@@ -20,56 +16,50 @@
             <div class="account-details-text">
                 <p>Account Details</p>
             </div>
-            <div class="name-label">
-                <p>NAME</p>
-            </div>
-            <div class="edit-profile-form">
-                <input class="edit-profile-field"
-                       type="text"
-                       placeholder="Change your name"
-                       name="name"
-                       required />
-            </div>
-            <div class="name-label">
-                <p>USERNAME</p>
-            </div>
-            <div class="edit-profile-form">
-                <input class="edit-profile-field"
-                       type="text"
-                       placeholder="Change your username"
-                       name="username"
-                       required />
-            </div>
-            <div class="name-label">
-                <p>BIO</p>
-            </div>
-            <div class="edit-profile-form">
-                <input class="edit-profile-field"
-                       type="text"
-                       placeholder="Tell me about yourself"
-                       name="bio"
-                       required />
-            </div>
-            <div class="name-label">
-                <p>CICS PROGRAM</p>
-            </div>
-            <div class="edit-profile-form">
-                <select class="edit-profile-field" name="cicsProgram" required>
-                    <option value="cics-it">Information Technology</option>
-                    <option value="cics-is">Information System</option>
-                    <option value="cics-cs">Computer Science</option>
-                </select>
-            </div>
+
+            <form asp-action="SaveChanges" method="post">
+                <div class="name-label">
+                    <p>NAME</p>
+                </div>
+                <div class="edit-profile-form">
+                    <input asp-for="Name" class="edit-profile-field" required />
+                </div>
+
+                <div class="name-label">
+                    <p>USERNAME</p>
+                </div>
+                <div class="edit-profile-form">
+                    <input asp-for="Username" class="edit-profile-field" required />
+                </div>
+
+                <div class="name-label">
+                    <p>BIO</p>
+                </div>
+                <div class="edit-profile-form">
+                    <input asp-for="Bio" class="edit-profile-field" required />
+                </div>
+
+                <div class="name-label">
+                    <p>CICS PROGRAM</p>
+                </div>
+                <div class="edit-profile-form">
+                    <select asp-for="CicsProgram" class="edit-profile-field" asp-items="Html.GetEnumSelectList<CicsProgram>()" required>
+                        <!-- Enum values will be automatically populated here -->
+                    </select>
+                </div>
+
+                <div class="edit-profile-btn-container">
+                    <form asp-controller="User" asp-action="UserProfile" method="post">
+                        <button type="submit" class="save-changes-btn">SAVE CHANGES</button>
+                        <button type="submit" formaction="UserProfile" class="cancel-btn">CANCEL</button>
+                    </form>
+                </div>
 
 
 
-            <div class="edit-profile-btn-container">
-                <button class="save-changes-btn">SAVE CHANGES</button>
-                <button class="cancel-btn">CANCEL</button>
-            </div>
+            </form>
+
         </div>
     </div>
     <!-- END OF PROFILE CONTAINER-->
 </div>
-
-
