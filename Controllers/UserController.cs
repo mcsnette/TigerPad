@@ -1,30 +1,52 @@
 ﻿// UserController.cs
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TigerPadG4.Data;
 using TigerPadG4.Models;
+using TigerPadG4.ViewModel;
 using System.Collections.Generic;
 
-namespace LMagtakaITELEC.Controllers
+namespace TigerPadG4.Controllers
 {
     public class UserController : Controller
     {
-        private static UserProfileModel userProfile = new UserProfileModel
+        //START HERE
+
+
+        private readonly UserContext _context;
+
+        public UserController(UserContext context)
         {
-            Name = "John Doe",
-            Username = "john_doe123",
-            Bio = "Passionate about technology",
-            CicsProgram = CicsProgram.IT
-        };
-        private static List<PostModel> _posts = new List<PostModel>(); // 
+            _context = context;
+        }
+  
 
         [HttpGet]
         public IActionResult UserProfile()
         {
-            return View(userProfile);
+
+            string userId = HttpContext.Session.GetString("UserId");
+            UserClass currentUser = _context.Users.FirstOrDefault(u => u.Id.ToString() == userId);
+            UserProfile userProfile = _context.Profiles.FirstOrDefault(profile => profile.Id == currentUser.Id);
+
+            if (currentUser != null)
+            {
+
+                return View(userProfile);
+
+            }
+
+            return View(_context.Profiles);
         }
 
         [HttpPost]
-        public IActionResult SaveChanges(UserProfileModel updatedProfile)
+        public IActionResult SaveChanges(UserProfile updatedProfile)
         {
+            string userId = HttpContext.Session.GetString("UserId");
+            UserClass currentUser = _context.Users.FirstOrDefault(u => u.Id.ToString() == userId);
+            UserProfile userProfile = _context.Profiles.FirstOrDefault(profile => profile.Id == currentUser.Id);
+
+
             if (ModelState.IsValid)
             {
                 // Update the userProfile with the submitted data
@@ -34,97 +56,108 @@ namespace LMagtakaITELEC.Controllers
                 userProfile.CicsProgram = updatedProfile.CicsProgram;
 
                 // Save changes (you may want to persist this data to a database)
-
+                _context.SaveChanges();
                 // Redirect back to the UserProfile page
                 return RedirectToAction("UserProfile");
             }
 
+            _context.SaveChanges();
             // If ModelState is not valid, return to the same UserProfile view with validation errors
             return View("UserProfile", userProfile);
         }
 
         public IActionResult EditUserProfile()
         {
-            return View("EditUserProfile");
+            string userId = HttpContext.Session.GetString("UserId");
+            UserClass currentUser = _context.Users.FirstOrDefault(u => u.Id.ToString() == userId);
+            UserProfile userProfile = _context.Profiles.FirstOrDefault(profile => profile.Id == currentUser.Id);
+
+            return View("EditUserProfile", userProfile);
         }
 
-        [HttpPost]
-        public IActionResult UpdateUserProfile(UserProfileModel updatedProfile)
-        {
-            if (ModelState.IsValid)
-            {
-                // Update the userProfile with the submitted data
-                userProfile.Name = updatedProfile.Name;
-                userProfile.Username = updatedProfile.Username;
-                userProfile.Bio = updatedProfile.Bio;
-                userProfile.CicsProgram = updatedProfile.CicsProgram;
-
-                // Save changes (you may want to persist this data to a database)
-
-                // Redirect back to the UserProfile page
-                return RedirectToAction("UserProfile");
-            }
-
-            // If ModelState is not valid, return to the same EditUserProfile view with validation errors
-            return View("EditUserProfile", updatedProfile);
-        }
 
         public IActionResult UserHomepage()
         {
-            // Initialize the posts list if not already done
-            if (_posts == null)
+            string userId = HttpContext.Session.GetString("UserId");
+            UserClass currentUser = _context.Users.FirstOrDefault(u => u.Id.ToString() == userId);
+            UserProfile userProfile = _context.Profiles.FirstOrDefault(profile => profile.Id == currentUser.Id);
+
+            var userPosts = _context.Posts;
+
+            QOTD qotd = _context.qotd.OrderByDescending(q => q.Id).FirstOrDefault();
+
+            var viewModel = new UserHomepageViewModel
             {
-                _posts = new List<PostModel>();
-            }
 
-            var posts = new List<PostModel>
-    {
-        new PostModel
-        {
-            ProfilePhoto = "~/images/profile-4.jpg",
-            Name = "Makoy",
-            Username = "@onyourmark",
-            PostContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla varius elementum nisl? Vel ullamcorper eros auctor sed..."
-        },
-        // Add more posts as needed
-    };
 
-            // Add existing posts to the list
-            _posts.AddRange(posts);
+                UserPosts = userPosts,
+                UserProfile = userProfile,
+                QOTD = qotd
+            };
 
-            return View(_posts);
+            return View(viewModel);
         }
+
+        [HttpGet]
+        public IActionResult qotd()
+        {
+            return View(_context.qotd);
+        }
+
+
+        public IActionResult UserInquiries()
+        {
+
+            string userId = HttpContext.Session.GetString("UserId");
+            UserClass currentUser = _context.Users.FirstOrDefault(u => u.Id.ToString() == userId);
+            UserProfile userProfile = _context.Profiles.FirstOrDefault(profile => profile.Id == currentUser.Id);
+
+            var userPosts = _context.Posts;
+
+            QOTD qotd = _context.qotd.OrderByDescending(q => q.Id).FirstOrDefault();
+
+            var viewModel = new UserHomepageViewModel
+            {
+                UserPosts = userPosts,
+                UserProfile = userProfile,
+                QOTD = qotd
+            };
+
+            return View(viewModel);
+
+        
+        }
+
+
         [HttpPost]
         public IActionResult CreatePost(string postContent)
         {
-            
+            string userId = HttpContext.Session.GetString("UserId");
+            UserClass currentUser = _context.Users.FirstOrDefault(u => u.Id.ToString() == userId);
+            UserProfile userProfile = _context.Profiles.FirstOrDefault(profile => profile.Id == currentUser.Id);
 
             // Create a new post
-            var newPost = new PostModel
+            var newPost = new UserPosts
             {
-                Name ="Si Idol" ,
-                Username= "Si Lodi",
-                ProfilePhoto = "~/images/profile-3.jpg", // Replace with the actual path
-                PostContent = postContent
+                Name = userProfile.Name,
+                Username = userProfile.Username,
+                /*ProfilePhoto = "~/images/profile-3.jpg", // Replace with the actual path*/
+                PostContent = postContent,
+                IsInquiry = false
+                
             };
 
             // Add the new post to the list (replace with your actual logic to save to a database)
-            _posts.Add(newPost);
+            _context.Posts.Add(newPost);
+            _context.SaveChangesAsync();
 
             // For simplicity, let's assume success and return a status
             return Json(new { success = true });
         }
-    
 
-    public IActionResult UserInquiries()
-        {
-            return View("UserInquiries");
-        }
 
-        public IActionResult UserBookmarks()
-        {
 
-            return View("UserBookmarks");
-        }
+
+
     }
 }

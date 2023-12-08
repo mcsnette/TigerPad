@@ -34,7 +34,7 @@ namespace TigerPadG4.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginInfo)
         {
-            var user = await _context.UserProfiles.SingleOrDefaultAsync(u => u.Username == loginInfo.Username && u.Password == loginInfo.Password);
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Username == loginInfo.Username && u.Password == loginInfo.Password);
 
             if (user != null)
             {
@@ -59,10 +59,11 @@ namespace TigerPadG4.Controllers
         }
 
         // LOGOUT
-        public async Task<IActionResult> Logout()
+        public IActionResult Logout()
         {
-            HttpContext.Session.Remove("UserId");
-            return RedirectToAction("UserLogin");
+            HttpContext.Session.Clear();
+                return RedirectToAction("UserLogin", "SignUp");
+            
         }
 
         // REGISTER
@@ -79,13 +80,27 @@ namespace TigerPadG4.Controllers
             {
                 UserClass newUser = new UserClass
                 {
+
                     Username = userEnteredData.UserName,
                     Email = userEnteredData.Email,
                     Password = userEnteredData.Password,
-                    Access = false
+                    Access = true
+                  
                 };
 
-                if (_context.UserProfiles.Any(u => u.Username == userEnteredData.UserName))
+
+                UserProfile newProfile = new UserProfile
+                {
+
+                    Name = userEnteredData.UserName,
+                    Username = userEnteredData.UserName,
+                    Bio = "Welcome to my Bio!!!",
+                    CicsProgram = CicsProgram.IT
+
+                };
+
+
+                if (_context.Users.Any(u => u.Username == userEnteredData.UserName))
                 {
                     ModelState.AddModelError("UserName", "Username already exists. Please choose a different one.");
                     return View("Index", userEnteredData);
@@ -98,9 +113,10 @@ namespace TigerPadG4.Controllers
                     return View("Index", userEnteredData);
                 }
 
+                    
 
-
-                _context.UserProfiles.Add(newUser); // Ensure UserProfiles matches the DbSet name in your context
+                _context.Users.Add(newUser); // Ensure UserProfiles matches the DbSet name in your context
+                _context.Profiles.Add(newProfile);
                 await _context.SaveChangesAsync();
 
                 

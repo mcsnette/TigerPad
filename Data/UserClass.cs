@@ -11,6 +11,11 @@ namespace TigerPadG4.Data
             public string Email { get; set; }
             public string Password { get; set; }
             public bool Access { get; set; }
+
+
+
+
+
         
 
     }

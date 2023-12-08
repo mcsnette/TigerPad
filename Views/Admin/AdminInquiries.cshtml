@@ -1,27 +1,30 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutLoggedInAdmin.cshtml";
 }
+@using TigerPadG4.ViewModel;
+@model UserHomepageViewModel;
 
 <!--MAIN CONTAINER-->
 <div class="user-inquiries-container">
     <!--==================LEFT SIDE=======================-->
-    <div class="user-inq-left-container">
-        <div class="inq-left-profile">
-            <div class="inq-user-profile-photo">
+    <div class="user-left-container">
+        <div class="left-profile">
+            <div class="user-profile-photo">
                 <img src="~/images/profile-3.jpg" />
             </div>
-            <div class="inq-user-profile-name">
-                <p>Admin</p>
-                <p>&#64AdminTigerPad01</p>
+            <div class="user-profile-name">
+                <p>@Model.UserProfile.Name</p>
+                <p>&#64;@Model.UserProfile.Username</p>
             </div>
         </div>
 
-        <div class="inq-left-sidebar">
-            <a asp-controller="Admin" asp-action="AdminHomepage" class="inq-sidebar-item">
+
+        <div class="left-sidebar">
+            <a asp-controller="Admin" asp-action="AdminHomepage" class="sidebar-item active">
                 <span><i class="uil uil-house-user"></i></span>
                 <h3>Home</h3>
             </a>
-            <a asp-controller="Admin" asp-action="AdminInquiries" class="inq-sidebar-item active">
+            <a asp-controller="Admin" asp-action="AdminInquiries" class="sidebar-item">
                 <span><i class="uil uil-comment-question"></i></span>
                 <h3>Inquiries</h3>
             </a>
@@ -36,55 +39,34 @@
         </div>
 
         <!----------- START OF POSTS----------->
-        <div class="middle-inquiries-post">
-            <div class="inq-user-detail">
-                <div class="inq-profile-photo">
-                    <img src="~/images/profile-4.jpg" />
+        @foreach (var post in Model.UserPosts.OrderByDescending(p => p.CreatedAt))
+        {
+            if(post.IsInquiry == true)
+            {
+            <div class="middle-homepage-post">
+                <div class="user-detail">
+                    @* <div class="profile-photo">
+            <img src="@post.ProfilePhoto" />
+            </div> *@
+                    <div class="user-info">
+                        <p class="name">@post.Name</p>
+                        <p class="username">@post.Username</p>
+                    </div>
                 </div>
-                <div class="inq-user-info">
-                    <p class="inq-name">Makoy</p>
-                    <p class="inq-username">&#64onyourmark</p>
+                <div class="user-post">
+                    <p>@post.PostContent</p>
+                </div>
+                <div class="admin-delete">
+                    <button class="admin-delete-btn" onclick="showModal(@post.Id)">DELETE</button>
                 </div>
             </div>
-            <div class="inq-user-post">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                    varius elementum nisl? Vel ullamcorper eros auctor sedDonec
-                    iaculis sagittis congue. Integer faucibus efficitur feugiat. Class
-                    aptent taciti sociosqu ad litora torquent per conubia nostra, per
-                    inceptos himenaeos.
-                </p>
-            </div>
-            <div class="admin-delete">
-                <button class="admin-delete-btn" onclick="showModal()">DELETE</button>
-            </div>
-        </div>
+
+
+            }
+            
+        }
 
         <!-----------------END OF POSTS---------------->
-
-        <div class="middle-inquiries-post">
-            <div class="inq-user-detail">
-                <div class="inq-profile-photo">
-                    <img src="~/images/profile-2.jpg" />
-                </div>
-                <div class="inq-user-info">
-                    <p class="inq-name">JJ</p>
-                    <p class="inq-username">&#64startswithj</p>
-                </div>
-            </div>
-            <div class="inq-user-post">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                    varius elementum nisl? Vel ullamcorper eros auctor sedDonec
-                    iaculis sagittis congue. Integer faucibus efficitur feugiat. Class
-                    aptent taciti sociosqu ad litora torquent per conubia nostra, per
-                    inceptos himenaeos.
-                </p>
-            </div>
-            <div class="admin-delete">
-                <button class="admin-delete-btn" onclick="showModal()">DELETE</button>
-            </div>
-        </div>
 
         <!-- END OF POSTS-->
         <div class="inq-middle-end-post">
@@ -122,6 +104,7 @@
         </div>
 
     </div>
+</div>
 
     <!--END OF RIGHT SIDE-->
 </div>

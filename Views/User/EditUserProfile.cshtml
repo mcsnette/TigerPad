@@ -1,4 +1,6 @@
-﻿@model UserProfileModel
+﻿@using TigerPadG4.Data
+
+@model UserProfile
 
 @{
     Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
@@ -49,16 +51,11 @@
                 </div>
 
                 <div class="edit-profile-btn-container">
-                    <form asp-controller="User" asp-action="UserProfile" method="post">
+             
                         <button type="submit" class="save-changes-btn">SAVE CHANGES</button>
                         <button type="submit" formaction="UserProfile" class="cancel-btn">CANCEL</button>
                     </form>
                 </div>
-
-
-
-            </form>
-
         </div>
     </div>
     <!-- END OF PROFILE CONTAINER-->

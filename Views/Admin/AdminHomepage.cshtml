@@ -2,6 +2,9 @@
     Layout = "~/Views/Shared/_LayoutLoggedInAdmin.cshtml";
 }
 
+@using TigerPadG4.ViewModel;
+@model UserHomepageViewModel;
+
 <!--MAIN CONTAINER-->
 <div class="user-homepage-container">
     <!--==================LEFT SIDE=======================-->
@@ -11,10 +14,11 @@
                 <img src="~/images/profile-3.jpg" />
             </div>
             <div class="user-profile-name">
-                <p>Admin</p>
-                <p>&#64AdminTigerPad01</p>
+                <p>@Model.UserProfile.Name</p>
+                <p>&#64;@Model.UserProfile.Username</p>
             </div>
         </div>
+
 
         <div class="left-sidebar">
             <a asp-controller="Admin" asp-action="AdminHomepage" class="sidebar-item active">
@@ -36,61 +40,31 @@
         </div>
 
         <!----------- START OF POSTS----------->
-        <div class="middle-homepage-post">
-            <div class="user-detail">
-                <div class="profile-photo">
-                    <img src="~/images/profile-4.jpg" />
+       @foreach (var post in Model.UserPosts.OrderByDescending(p => p.CreatedAt))
+        {
+            if (post.IsInquiry == false){
+                <div class="middle-homepage-post">
+                    <div class="user-detail">
+                        @* <div class="profile-photo">
+                <img src="@post.ProfilePhoto" />
+                </div> *@
+                        <div class="user-info">
+                            <p class="name">@post.Name</p>
+                            <p class="username">@post.Username</p>
+                        </div>
+                    </div>
+                    <div class="user-post">
+                        <p>@post.PostContent</p>
+                    </div>
+                    <div class="admin-delete">
+                        <button class="admin-delete-btn" onclick="showModal(@post.Id)">DELETE</button>
+                    </div>
                 </div>
-                <div class="user-info">
-                    <p class="name">Makoy</p>
-                    <p class="username">&#64onyourmark</p>
-                </div>
-            </div>
-            <div class="user-post">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                    varius elementum nisl? Vel ullamcorper eros auctor sedDonec
-                    iaculis sagittis congue. Integer faucibus efficitur feugiat. Class
-                    aptent taciti sociosqu ad litora torquent per conubia nostra, per
-                    inceptos himenaeos.
-                </p>
-            </div>
-            <div class="admin-delete">
-                <button class="admin-delete-btn" onclick="showModal()">DELETE</button>
-            </div>
-        </div>
+            }
+            
 
+            }
         <!-----------------END OF POSTS---------------->
-
-        <div class="middle-homepage-post">
-            <div class="user-detail">
-                <div class="profile-photo">
-                    <img src="~/images/profile-2.jpg" />
-                </div>
-                <div class="user-info">
-                    <p class="name">JJ</p>
-                    <p class="username">&#64startswithj</p>
-                </div>
-            </div>
-            <div class="user-post">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                    varius elementum nisl? Vel ullamcorper eros auctor sedDonec
-                    iaculis sagittis congue. Integer faucibus efficitur feugiat. Class
-                    aptent taciti sociosqu ad litora torquent per conubia nostra, per
-                    inceptos himenaeos.
-                </p>
-            </div>
-            <div class="admin-delete">
-                <button class="admin-delete-btn" onclick="showModal()">DELETE</button>
-            </div>
-        </div>
-<!--        <div class="middle-homepage-post"></div>
-        <div class="middle-homepage-post"></div>
-        <div class="middle-homepage-post"></div>
-        <div class="middle-homepage-post"></div>
-        <div class="middle-homepage-post"></div>
-        <div class="middle-homepage-post"></div> -->
 
         <!-- END OF POSTS-->
         <div class="middle-end-post">
@@ -101,10 +75,7 @@
     <div class="inq-admin-right-container">
         <div class="quote-text"><p>Quote of the Day</p></div>
         <div class="quote-content" id="quote-content">
-            <p>
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                varius elementum nisl? Vel ullamcorper eros auctor sed"
-            </p>
+            <p>@Model.QOTD.QuoteOftheDay</p>
         </div>
         <button class="admin-edit-quote-btn" onclick="showEditModal()">EDIT QUOTE</button>
 
@@ -136,9 +107,17 @@
 <script>
 
 // DELETE POST //
-    function showModal() {
+    function showModal(postId) {
         var modal = document.getElementById('deleteModal');
         modal.style.display = 'flex';
+
+        // Store the post ID in a data attribute of the modal
+        modal.setAttribute('data-post-id', postId);
+    }
+
+    function closeModal() {
+        var modal = document.getElementById('deleteModal');
+        modal.style.display = 'none';
     }
 
     function closeModal() {
@@ -147,33 +126,62 @@
     }
 
     function deleteItem() {
-        // DELETE HERE
-        alert('Post deleted!');
-        closeModal();
+        var modal = document.getElementById('deleteModal');
+        var postId = modal.getAttribute('data-post-id');
+
+        // Use AJAX to send the delete request to the server
+        $.post("/Admin/DeletePost", { postId: postId })
+            .done(function (data) {
+                // Handle success if needed
+                alert('Post deleted!');
+                closeModal();
+                location.reload(); // Reload the page after deletion
+            })
+            .fail(function (error) {
+                // Handle error if needed
+                console.error("Error deleting post:", error);
+                closeModal();
+            });
     }
  
+
+
+
 // EDIT QUOTE OF THE DAY //
 
-// Function to show the edit modal
+
+
     function showEditModal() {
         var modal = document.getElementById('editModal');
         modal.style.display = 'flex';
     }
 
-// Function to save the edited content
+    // Function to save the edited content
     function saveEdit() {
         var modal = document.getElementById('editModal');
-        var contentQuote = document.getElementById('quote-content');
-        var newQuote = document.getElementById('newQuote');
+        var newQuote = document.getElementById('newQuote').value;
 
-// Update the content with the edited text
-        contentQuote.innerHTML = '<p>' + newQuote.value + '</p>';
+        // Use AJAX to send the edited quote to the server
+        $.post("/Admin/qotd", { str: newQuote })
+            .done(function (data) {
+                // Handle success if needed
+                console.log("Quote edited and saved successfully.");
 
-// Close modal
-        modal.style.display = 'none';
+                // Close modal
+                modal.style.display = 'none';
+
+                location.reload();
+            })
+            .fail(function (error) {
+                // Handle error if needed
+                console.error("Error editing and saving quote:", error);
+
+                // Close modal even if there's an error
+                modal.style.display = 'none';
+            });
     }
 
-// Cancel edit
+    // Cancel edit
     function cancelEdit() {
         var modal = document.getElementById('editModal');
         modal.style.display = 'none';

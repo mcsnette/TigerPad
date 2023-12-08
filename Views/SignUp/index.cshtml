@@ -38,7 +38,8 @@
                 <div class="alert alert-danger" role="alert">
                     @foreach (var error in userNameErrors.Errors)
                     {
-                        <p>@error.ErrorMessage</p>
+                        <p style="text-align: center; color: red">Username Error.</p>
+                        <p style="text-align: center; color: red">The username is taken. Please try another</p>
                     }
                 </div>
             }
@@ -97,11 +98,12 @@
         </div>
     </div>
 
-
+   
 
     </form>
-    <!-- END OF REGISTRATION FORM-->
 </div>
+    <!-- END OF REGISTRATION FORM-->
+
 
 
 <!-- END OF MAIN CONTAINER-->
