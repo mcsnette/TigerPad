@@ -32,6 +32,29 @@
             <h3><b>SIGN UP</b></h3>
             <hr />
         </div>
+
+            @if (ViewData.ModelState.TryGetValue("UserName", out var userNameErrors))
+            {
+                <div class="alert alert-danger" role="alert">
+                    @foreach (var error in userNameErrors.Errors)
+                    {
+                        <p>@error.ErrorMessage</p>
+                    }
+                </div>
+            }
+
+            @if (ViewData.ModelState.TryGetValue("Password", out var passwordErrors))
+            {
+                <div class="alert alert-danger" role="alert">
+                    @foreach (var error in passwordErrors.Errors)
+                    {
+                        <p style="text-align: center">Password Error.</p>
+                        <p style="text-align: center">Must contain upper and lowercase letters, one number, and at least 8 characters</p>
+                    }
+                </div>
+            }
+
+
         <div>
             <label asp-for="UserName"><b>USERNAME</b></label>
         </div>
