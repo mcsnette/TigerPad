@@ -8,8 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
-
-
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<UserContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -26,8 +24,6 @@ var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<User
 
 context.Database.EnsureCreated();
 //context.Database.EnsureDeleted();
-
-
 
 
 

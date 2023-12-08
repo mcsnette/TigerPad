@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using TigerPadG4.ViewModel;
+using System.Text.RegularExpressions;
 
 namespace TigerPadG4.Controllers
 {
@@ -84,8 +85,26 @@ namespace TigerPadG4.Controllers
                     Access = false
                 };
 
+                if (_context.UserProfiles.Any(u => u.Username == userEnteredData.UserName))
+                {
+                    ModelState.AddModelError("UserName", "Username already exists. Please choose a different one.");
+                    return View("Index", userEnteredData);
+                }
+
+                // Validate password requirements
+                if (!IsPasswordValid(userEnteredData.Password))
+                {
+                    ModelState.AddModelError("Password", "Password must contain at least one uppercase letter, one lowercase letter, one digit, and have a minimum length of 8 characters.");
+                    return View("Index", userEnteredData);
+                }
+
+
+
                 _context.UserProfiles.Add(newUser); // Ensure UserProfiles matches the DbSet name in your context
                 await _context.SaveChangesAsync();
+
+                
+
 
                 HttpContext.Session.SetString("UserId", newUser.Id.ToString());
 
@@ -93,6 +112,17 @@ namespace TigerPadG4.Controllers
             }
 
             return View(userEnteredData);
+        }
+
+        private bool IsPasswordValid(string password)
+        {
+            // Add your custom password validation logic here
+            // For example, you can use regular expressions or other methods to enforce password requirements
+
+            // Example using regular expression:
+            // Requires at least one uppercase letter, one lowercase letter, one digit, and minimum length of 8 characters
+            var passwordRegex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$");
+            return passwordRegex.IsMatch(password);
         }
 
         public IActionResult AdminLogin()

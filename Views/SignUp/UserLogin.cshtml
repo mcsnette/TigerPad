@@ -15,6 +15,16 @@
     </div>
 
     <form asp-action="Login">
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger" role="alert">
+                <p style="text-align: center; color: red">Login failed.</p>
+                <p style="text-align: center; color: red"> Please check your username and password. </p>
+            </div>
+
+        }
+
         <div>
             <label asp-for="Username"><b>USERNAME</b></label>
         </div>
