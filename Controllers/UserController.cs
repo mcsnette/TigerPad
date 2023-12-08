@@ -1,6 +1,7 @@
 ﻿// UserController.cs
 using Microsoft.AspNetCore.Mvc;
 using TigerPadG4.Models;
+using System.Collections.Generic;
 
 namespace LMagtakaITELEC.Controllers
 {
@@ -13,6 +14,7 @@ namespace LMagtakaITELEC.Controllers
             Bio = "Passionate about technology",
             CicsProgram = CicsProgram.IT
         };
+        private static List<PostModel> _posts = new List<PostModel>(); // 
 
         [HttpGet]
         public IActionResult UserProfile()
@@ -69,22 +71,52 @@ namespace LMagtakaITELEC.Controllers
 
         public IActionResult UserHomepage()
         {
-            var posts = new List<PostModel>
-        {
-            new PostModel
+            // Initialize the posts list if not already done
+            if (_posts == null)
             {
-                ProfilePhoto = "~/images/profile-4.jpg",
-                Name = "Makoy",
-                Username = "@onyourmark",
-                PostContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla varius elementum nisl? Vel ullamcorper eros auctor sed..."
-            },
-            // Add more posts as needed
-        };
+                _posts = new List<PostModel>();
+            }
 
-            return View(posts);
+            var posts = new List<PostModel>
+    {
+        new PostModel
+        {
+            ProfilePhoto = "~/images/profile-4.jpg",
+            Name = "Makoy",
+            Username = "@onyourmark",
+            PostContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla varius elementum nisl? Vel ullamcorper eros auctor sed..."
+        },
+        // Add more posts as needed
+    };
+
+            // Add existing posts to the list
+            _posts.AddRange(posts);
+
+            return View(_posts);
         }
+        [HttpPost]
+        public IActionResult CreatePost(string postContent)
+        {
+            
 
-        public IActionResult UserInquiries()
+            // Create a new post
+            var newPost = new PostModel
+            {
+                Name ="Si Idol" ,
+                Username= "Si Lodi",
+                ProfilePhoto = "~/images/profile-3.jpg", // Replace with the actual path
+                PostContent = postContent
+            };
+
+            // Add the new post to the list (replace with your actual logic to save to a database)
+            _posts.Add(newPost);
+
+            // For simplicity, let's assume success and return a status
+            return Json(new { success = true });
+        }
+    
+
+    public IActionResult UserInquiries()
         {
             return View("UserInquiries");
         }

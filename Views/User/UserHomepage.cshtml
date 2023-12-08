@@ -32,7 +32,7 @@
                 <h3>Bookmarks</h3>
             </a>
         </div>
-        <div class="left-button"><button>CREATE POST</button></div>
+        <div class="left-button"><button id="createPostButton">CREATE POST</button></div>
     </div>
 
     <!--==================MIDDLE SIDE=======================-->
@@ -115,3 +115,59 @@
     <!--END OF RIGHT SIDE-->
 </div>
 <!-- END OF MAIN CONTAINER-->
+<!-- Modal -->
+<div id="createPostModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Create a Post</h2>
+        <textarea id="postContent" rows="4" cols="50" placeholder="Type your post here..."></textarea>
+        <button onclick="submitPost()">Submit Post</button>
+    </div>
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("createPostModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("createPostButton");
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Function to close the modal
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+    // Function to submit the post
+    function submitPost() {
+        // Get the post content from the textarea
+        var postContent = document.getElementById("postContent").value;
+
+        // Close the modal
+        closeModal();
+
+        // Send the post content to the server (you'll need to implement a controller action for this)
+        // For simplicity, let's assume there's a User/CreatePost action in UserController
+        $.post("/User/CreatePost", { postContent: postContent })
+            .done(function (data) {
+                // Assuming the server responds with success
+                // Reload the page or update the post list with the new post
+                location.reload();
+            })
+            .fail(function (error) {
+                // Handle the error
+                console.error("Error submitting post:", error);
+            });
+    }
+</script>
