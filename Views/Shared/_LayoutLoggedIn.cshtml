@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign Up</title>
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
     <!-- ICONSOUT CDN-->
     <link rel="stylesheet"
@@ -18,10 +17,8 @@
             <ul>
                 <li><img src="~/images/logo-square.png" /></li>
                 <li><a asp-controller="User" asp-action="UserHomepage">HOME</a></li>
-                <li><a asp-controller="User" asp-action="UserInquiries">INQUIRIES</a></li>
-                <li><a asp-controller="User" asp-action="UserBookmarks">BOOKMARKS</a></li>
                 <li><a asp-controller="User" asp-action="UserProfile">PROFILE</a></li>
-                <li class="logout-btn"><a asp-controller="SignUp" asp-action="Logout">LOGOUT</a></li>
+                <li class="logout-btn"><a asp-controller="SignUp" asp-action="Logout"><button>LOGOUT</button></a></li>
             </ul>
         </nav>
         <!--END OF NAVIGATION BAR-->
