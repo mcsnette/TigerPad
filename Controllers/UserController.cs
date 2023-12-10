@@ -93,6 +93,20 @@ namespace TigerPadG4.Controllers
             return View("EditUserProfile", userProfile);
         }
 
+        public IActionResult Cancel()
+        {
+
+            string userId = HttpContext.Session.GetString("UserId");
+            UserClass currentUser = _context.Users.FirstOrDefault(u => u.Id.ToString() == userId);
+            UserProfile userProfile = _context.Profiles.FirstOrDefault(profile => profile.Id == currentUser.Id);
+
+
+            return RedirectToAction("UserProfile");
+
+        
+        }
+
+
 
         public IActionResult UserHomepage()
         {
