@@ -20,6 +20,18 @@
             </div>
 
             <form asp-action="SaveChanges" method="post">
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        <p style="text-align: center; color: red">Username already exists. Please choose a different one.</p>
+                      
+                    </div>
+
+                }
+
+
+
                 <div class="name-label">
                     <p>NAME</p>
                 </div>
@@ -60,3 +72,4 @@
     </div>
     <!-- END OF PROFILE CONTAINER-->
 </div>
+
