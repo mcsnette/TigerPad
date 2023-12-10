@@ -38,8 +38,7 @@
                 <div class="alert alert-danger" role="alert">
                     @foreach (var error in userNameErrors.Errors)
                     {
-                        <p style="text-align: center; color: red">Username Error.</p>
-                        <p style="text-align: center; color: red">The username is taken. Please try another</p>
+                        <p style="text-align: center; color: red; margin: 0; font-size: 8px;">The username is taken. Please try another</p>
                     }
                 </div>
             }
@@ -49,8 +48,8 @@
                 <div class="alert alert-danger" role="alert">
                     @foreach (var error in passwordErrors.Errors)
                     {
-                        <p style="text-align: center; color: red">Password Error.</p>
-                        <p style="text-align: center; color: red">Must contain upper and lowercase letters, one number, and at least 8 characters</p>
+                        <p style="text-align: center; color: red; margin: 0; font-size: 8px;">Please create a strong password</p>
+
                     }
                 </div>
             }

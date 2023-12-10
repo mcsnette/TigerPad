@@ -621,6 +621,91 @@
 
 /* -- POP UP MODAL FOR DELETION -- */
 
+.delete-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.deletePost-modal-content {
+    background-color: #fff;
+    margin: 25% auto;
+    padding: 31px;
+    border-radius: 25px;
+    width: 26%;
+    height: 18%;
+    position: relative;
+    text-align: center;
+}
+
+.deletePost-modal-content p{
+    color: #A6A4A4;
+    font-size: 18px;
+    font-style: italic;
+    margin-bottom: 25px;
+}
+
+.yes-post-btn {
+    background-color: #A62424;
+    color: #fff;
+    border: none;
+    width:110px; 
+    height: 34px;
+    font-weight: bold;
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.yes-post-btn:hover{
+    background-color: #545454;
+}
+
+.no-post-btn {
+    background-color: #A6A4A4;
+    color: #fff;
+    border: none;
+    width: 110px;
+    height: 34px;
+    font-weight: bold;
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.no-post-btn:hover {
+    background-color: #545454;
+}
+
+
+/*MODAL QUOTE*/
+
+.modal-quote {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+/* -- POP UP MODAL FOR CREATE POST -- */
+
 .modal {
     display: none;
     position: fixed;
@@ -1522,7 +1607,7 @@
 }
 
 .user-info {
-  width: 500px;
+  width: 570px;
 }
 
 .user-info p {
