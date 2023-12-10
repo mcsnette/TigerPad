@@ -84,7 +84,7 @@ namespace TigerPadG4.Controllers
                     Username = userEnteredData.UserName,
                     Email = userEnteredData.Email,
                     Password = userEnteredData.Password,
-                    Access = true
+                    Access = false
                   
                 };
 

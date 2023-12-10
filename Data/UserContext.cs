@@ -31,9 +31,7 @@ public class UserContext : DbContext
                 Id = 1,
                 QuoteOftheDay = "Welcome to Tigerpad! We hope you enjoy your stay!"
 
-            }
-            
-            );
+            });
 
         modelBuilder.Entity<UserPosts>().HasData(
 
@@ -57,11 +55,20 @@ public class UserContext : DbContext
                  CreatedAt = DateTime.Now,
                  IsInquiry = true,
 
-             })
-            
-            
-            
-            ;
+             });
+        modelBuilder.Entity<UserClass>().HasData(
+
+            new UserClass
+            {
+                Id=1,
+                Username="MinetteGanda",
+                Password="MinetteGanda",
+                Email="Minette@Ganda",
+                Access=true
+            }
+
+            );
+        
 
 
            
