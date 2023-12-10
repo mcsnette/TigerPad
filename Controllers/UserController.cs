@@ -55,6 +55,9 @@ namespace TigerPadG4.Controllers
                 userProfile.Bio = updatedProfile.Bio;
                 userProfile.CicsProgram = updatedProfile.CicsProgram;
 
+
+                currentUser.Username = updatedProfile.Username;
+
                 // Save changes (you may want to persist this data to a database)
                 _context.SaveChanges();
                 // Redirect back to the UserProfile page
@@ -86,10 +89,10 @@ namespace TigerPadG4.Controllers
 
             QOTD qotd = _context.qotd.OrderByDescending(q => q.Id).FirstOrDefault();
 
+
+
             var viewModel = new UserHomepageViewModel
             {
-
-
                 UserPosts = userPosts,
                 UserProfile = userProfile,
                 QOTD = qotd
