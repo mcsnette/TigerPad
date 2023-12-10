@@ -22,6 +22,12 @@
         </div>
     </div>
 
+
+    <!-- Add a hidden dialog box for password error -->
+    <div id="passwordErrorDialog" class="dialog-box">
+        <p id="passwordErrorText"></p>
+    </div>
+
     <!--START OF REGISTRATION FORM-->
  <form asp-action = "Register">
 
@@ -38,7 +44,7 @@
                 <div class="alert alert-danger" role="alert">
                     @foreach (var error in userNameErrors.Errors)
                     {
-                        <p style="text-align: center; color: red; margin: 0; font-size: 8px;">The username is taken. Please try another</p>
+                        <p style="text-align: center; color: red; margin: 0; font-size: 10px;">The username is taken. Please try another.</p>
                     }
                 </div>
             }
@@ -48,7 +54,8 @@
                 <div class="alert alert-danger" role="alert">
                     @foreach (var error in passwordErrors.Errors)
                     {
-                        <p style="text-align: center; color: red; margin: 0; font-size: 8px;">Please create a strong password</p>
+                        <p style="text-align: center; color: red; margin: 0; font-size: 11px; line-height: 2.5px;">Password must contain atleast 1 uppercase, 1 lowercase,</p>
+                        <p style="text-align: center; color: red; margin: 0; font-size: 11px; line-height: 23px;">1 number, and 8 minimum characters.</p>
 
                     }
                 </div>
