@@ -56,6 +56,9 @@ public class UserContext : DbContext
                  IsInquiry = true,
 
              });
+
+
+
         modelBuilder.Entity<UserClass>().HasData(
 
             new UserClass
@@ -65,7 +68,20 @@ public class UserContext : DbContext
                 Password="MinetteGanda",
                 Email="Minette@Ganda",
                 Access=true
+            });
+
+        modelBuilder.Entity<UserProfile>().HasData(
+
+            new UserProfile
+            {
+                Id = 1,
+                Name="MinetteGanda",
+                Username="MinetteGanda",
+                Bio="I'm so pretty",
+                CicsProgram = CicsProgram.IT
+              
             }
+
 
             );
         
