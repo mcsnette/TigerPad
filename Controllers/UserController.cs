@@ -49,11 +49,26 @@ namespace TigerPadG4.Controllers
 
             if (ModelState.IsValid)
             {
+                if (userProfile.Username == updatedProfile.Username)
+                {
+                    // Redirect back to the UserProfile page
+                    return RedirectToAction("UserProfile");
+                }
+
+
                 // Update the userProfile with the submitted data
                 userProfile.Name = updatedProfile.Name;
                 userProfile.Username = updatedProfile.Username;
                 userProfile.Bio = updatedProfile.Bio;
                 userProfile.CicsProgram = updatedProfile.CicsProgram;
+
+                if(_context.Users.Any(u => u.Username == userProfile.Username) )
+                {
+                   
+
+                    ModelState.AddModelError("UserName", "Username already exists. Please choose a different one.");
+                    return View("EditUserProfile", userProfile);
+                }
 
 
                 currentUser.Username = updatedProfile.Username;
