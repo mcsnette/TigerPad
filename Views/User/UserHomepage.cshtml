@@ -5,13 +5,14 @@
 @using TigerPadG4.ViewModel
 @model UserHomepageViewModel;
 
+<title>User Homepage</title>
 <!--MAIN CONTAINER-->
 <div class="user-homepage-container">
     <!--==================LEFT SIDE=======================-->
     <div class="user-left-container">
         <div class="left-profile">
             <div class="user-profile-photo">
-                <img src="~/images/profile-3.jpg" />
+                <img src="~/images/user-profile-default.png" />
             </div>
             <div class="user-profile-name">
                 <p>@Model.UserProfile.Name</p>
@@ -24,12 +25,12 @@
                 <span><i class="uil uil-house-user"></i></span>
                 <h3>Home</h3>
             </a>
-            <a asp-controller="User" asp-action="UserInquiries" class="sidebar-item">
+            <a asp-controller="User" asp-action="UserProfile" class="sidebar-item">
                 <span><i class="uil uil-comment-question"></i></span>
-                <h3>Inquiries</h3>
+                <h3>Profile</h3>
             </a>
         </div>
-        <div class="left-button"><button id="createPostButton">CREATE POST</button></div>
+        <div><button class="left-button" id="createPostButton">CREATE POST</button></div>
     </div>
 
     <!--==================MIDDLE SIDE=======================-->
@@ -83,15 +84,17 @@
 <!-- END OF MAIN CONTAINER-->
 
 
-<!-- Modal -->
+<!-- Create Post Modal Structure -->
 <div id="createPostModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h2>Create a Post</h2>
-        <textarea id="postContent" rows="4" cols="50" placeholder="Type your post here..."></textarea>
-        <button onclick="submitPost()">Submit Post</button>
+        <span class="close" onclick="closeModal()"><i class="uil uil-times-circle"></i></span>
+        <div class="create-container">
+            <textarea id="postContent" rows="4" cols="50" placeholder="Let out a roar!"></textarea>
+        </div>
+        <button class="post-btn" onclick="submitPost()">POST</button>
     </div>
 </div>
+
 
 <script>
     // Get the modal

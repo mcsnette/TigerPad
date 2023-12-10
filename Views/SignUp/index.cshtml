@@ -2,14 +2,14 @@
     Layout = "~/Views/Shared/_LayoutLoggedOut.cshtml";
     
 }
-
+<title>Sign Up</title>
 @using TigerPadG4.ViewModel
 @model RegisterViewModel;
 
 <div class="main-container">
     <div class="register-container">
         <div class="register-logo">
-            <img src="./images/logo-notext.png" />
+            <img src="~/images/logo-notext.png" />
         </div>
         <div class="community">
             <h3><b>community</b></h3>
@@ -38,8 +38,7 @@
                 <div class="alert alert-danger" role="alert">
                     @foreach (var error in userNameErrors.Errors)
                     {
-                        <p style="text-align: center; color: red">Username Error.</p>
-                        <p style="text-align: center; color: red">The username is taken. Please try another</p>
+                        <p style="text-align: center; color: red; margin: 0; font-size: 8px;">The username is taken. Please try another</p>
                     }
                 </div>
             }
@@ -49,8 +48,8 @@
                 <div class="alert alert-danger" role="alert">
                     @foreach (var error in passwordErrors.Errors)
                     {
-                        <p style="text-align: center; color: red">Password Error.</p>
-                        <p style="text-align: center; color: red">Must contain upper and lowercase letters, one number, and at least 8 characters</p>
+                        <p style="text-align: center; color: red; margin: 0; font-size: 8px;">Please create a strong password</p>
+
                     }
                 </div>
             }
